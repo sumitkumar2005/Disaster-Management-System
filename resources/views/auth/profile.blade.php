@@ -3,60 +3,61 @@
 @section('title', 'Profile')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card shadow">
-                <div class="card-header bg-primary text-white">
-                    <h4 class="mb-0">My Profile</h4>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="flex justify-center items-center mb-6">
+        <div class="w-full md:w-2/3 lg:w-1/2">
+            <!-- Profile Information Card -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="bg-blue-600 px-6 py-4">
+                    <h2 class="text-xl font-semibold text-white">My Profile</h2>
                 </div>
-                <div class="card-body">
+                <div class="p-6">
                     <form method="POST" action="{{ route('profile.update') }}">
                         @csrf
                         @method('PUT')
 
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
-                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $user->name) }}" required autocomplete="name" autofocus>
+                        <div class="mb-4">
+                            <label for="name" class="block text-gray-700 text-sm font-medium mb-2">Name</label>
+                            <input id="name" type="text" 
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 @error('name') border-red-500 @enderror" 
+                                name="name" value="{{ old('name', $user->name) }}" required autocomplete="name" autofocus>
                             @error('name')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
+                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                             @enderror
                         </div>
 
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email Address</label>
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email', $user->email) }}" required autocomplete="email">
+                        <div class="mb-4">
+                            <label for="email" class="block text-gray-700 text-sm font-medium mb-2">Email Address</label>
+                            <input id="email" type="email" 
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 @error('email') border-red-500 @enderror" 
+                                name="email" value="{{ old('email', $user->email) }}" required autocomplete="email">
                             @error('email')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
+                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                             @enderror
                         </div>
 
-                        <div class="mb-3">
-                            <label for="phone" class="form-label">Phone Number</label>
-                            <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone', $user->phone) }}" required autocomplete="tel">
+                        <div class="mb-4">
+                            <label for="phone" class="block text-gray-700 text-sm font-medium mb-2">Phone Number</label>
+                            <input id="phone" type="text" 
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 @error('phone') border-red-500 @enderror" 
+                                name="phone" value="{{ old('phone', $user->phone) }}" required autocomplete="tel">
                             @error('phone')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
+                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                             @enderror
                         </div>
 
-                        <div class="mb-3">
-                            <label for="location" class="form-label">Location</label>
-                            <input id="location" type="text" class="form-control @error('location') is-invalid @enderror" name="location" value="{{ old('location', $user->location) }}" required>
+                        <div class="mb-6">
+                            <label for="location" class="block text-gray-700 text-sm font-medium mb-2">Location</label>
+                            <input id="location" type="text" 
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 @error('location') border-red-500 @enderror" 
+                                name="location" value="{{ old('location', $user->location) }}" required>
                             @error('location')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
+                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                             @enderror
                         </div>
 
-                        <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary">
+                        <div>
+                            <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors">
                                 Update Profile
                             </button>
                         </div>
@@ -65,12 +66,14 @@
             </div>
             
             <!-- Password Change Section -->
-            <div class="card shadow mt-4">
-                <div class="card-header bg-primary text-white">
-                    <h4 class="mb-0">Change Password</h4>
+            <div class="bg-white rounded-lg shadow-md overflow-hidden mt-6">
+                <div class="bg-blue-600 px-6 py-4">
+                    <h2 class="text-xl font-semibold text-white">Change Password</h2>
                 </div>
-                <div class="card-body">
-                    <p class="text-muted mb-3">To change your password, please use the <a href="{{ route('password.request') }}">password reset</a> functionality.</p>
+                <div class="p-6">
+                    <p class="text-gray-600 mb-2">To change your password, please use the 
+                        <a href="{{ route('password.request') }}" class="text-blue-600 hover:text-blue-800 hover:underline">password reset</a> functionality.
+                    </p>
                 </div>
             </div>
         </div>

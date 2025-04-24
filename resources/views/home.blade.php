@@ -148,7 +148,7 @@
                     </div>
                 </div>
                 <div class="md:w-1/2 mt-8 md:mt-0">
-                    <img src="/api/placeholder/600/400" alt="Disaster Management" class="rounded-lg shadow" />
+                    <img src="{{ asset('images/home1.jpg') }}" alt="Disaster Management" class="rounded-lg shadow " />
                 </div>
             </div>
         </section>
@@ -226,7 +226,7 @@
                 <!-- Article 1 -->
                 <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition overflow-hidden">
                     <div class="h-48 bg-gray-200 mb-4 rounded overflow-hidden">
-                        <img src="/api/placeholder/400/300" alt="Flood in Assam" class="w-full h-full object-cover" />
+                        <img src="{{ asset('images/news1.png') }}" alt="Flood in Assam" class="w-full h-full object-cover" />
                     </div>
                     <div class="bg-red-100 text-red-800 text-xs font-medium px-2 py-1 rounded mb-3 inline-block">Breaking</div>
                     <h3 class="text-xl font-semibold mb-2">Severe Floods Hit Assam</h3>
@@ -243,7 +243,7 @@
                 <!-- Article 2 -->
                 <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition overflow-hidden">
                     <div class="h-48 bg-gray-200 mb-4 rounded overflow-hidden">
-                        <img src="/api/placeholder/400/300" alt="Cyclone Remal" class="w-full h-full object-cover" />
+                        <img src="{{ asset('images/news2.png') }}" alt="Cyclone Remal" class="w-full h-full object-cover" />
                     </div>
                     <div class="bg-amber-100 text-amber-800 text-xs font-medium px-2 py-1 rounded mb-3 inline-block">Alert</div>
                     <h3 class="text-xl font-semibold mb-2">Cyclone Remal Approaches Eastern Coast</h3>
@@ -260,7 +260,7 @@
                 <!-- Article 3 -->
                 <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition overflow-hidden">
                     <div class="h-48 bg-gray-200 mb-4 rounded overflow-hidden">
-                        <img src="/api/placeholder/400/300" alt="Heatwave" class="w-full h-full object-cover" />
+                        <img src="{{ asset('images/news3.png') }}" alt="Heatwave" class="w-full h-full object-cover" />
                     </div>
                     <div class="bg-amber-100 text-amber-800 text-xs font-medium px-2 py-1 rounded mb-3 inline-block">Warning</div>
                     <h3 class="text-xl font-semibold mb-2">Heatwave Sweeps Across Northern India</h3>
@@ -315,7 +315,7 @@
                     <h3 class="text-xl font-semibold mb-4">Family Emergency Plan</h3>
                     <p class="mb-4">Create a plan with your family for different emergency scenarios. Include meeting points, contact information, and evacuation routes.</p>
                     <a href="/resources" class="inline-block px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
-                        Create Your Plan
+                        Be Prepared !
                     </a>
                 </div>
             </div>
