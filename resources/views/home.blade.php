@@ -128,30 +128,250 @@
 
     <!-- Main Content -->
     <main class="flex-grow container mx-auto px-6 py-8">
-        <!-- Hero Section -->
-        <section class="mb-16 bg-white p-8 rounded-lg shadow-md">
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 text-center md:text-left">
-                    <h1 class="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Disaster Management System</h1>
-                    <p class="text-xl mb-8 text-gray-600">Providing critical support and resources during emergencies</p>
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="/alerts" class="inline-block">
-                            <button class="bg-red-600 text-white px-8 py-3 rounded-lg hover:bg-red-700 transition alert-pulse w-full sm:w-auto">
-                                Emergency Alerts
-                            </button>
-                        </a>
-                        <a href="/resources" class="inline-block">
-                            <button class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition w-full sm:w-auto">
-                                Find Resources
-                            </button>
-                        </a>
+    <!-- Hero Section -->
+<section class="mb-16 relative rounded-lg shadow-md overflow-hidden">
+    <!-- Background Image with Overlay -->
+    <div class="absolute inset-0 bg-black/50">
+        <img src="{{ asset('images/home1.jpg') }}" alt="Disaster Management" class="w-full h-full object-cover mix-blend-overlay" />
+    </div>
+    
+    <!-- Content -->
+    <div class="relative z-10 flex flex-col items-center justify-center text-center text-white p-16 md:p-24">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">Disaster Management System</h1>
+        <p class="text-xl mb-8 max-w-2xl mx-auto">Providing critical support and resources during emergencies</p>
+        <div class="flex flex-col sm:flex-row gap-4">
+            <a href="/alerts" class="inline-block">
+                <button class="bg-red-600 text-white px-8 py-3 rounded-lg hover:bg-red-700 transition alert-pulse w-full sm:w-auto">
+                    Emergency Alerts
+                </button>
+            </a>
+            <a href="/resources" class="inline-block">
+                <button class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition w-full sm:w-auto">
+                    Find Resources
+                </button>
+            </a>
+            <button id="report-alert-btn" class="bg-amber-500 text-white px-8 py-3 rounded-lg hover:bg-amber-600 transition w-full sm:w-auto">
+                Report an Incident
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+            </button>
+        </div>
+    </div>
+</section>
+<!-- Report Alert Modal -->
+<div id="report-alert-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
+    <!-- Backdrop -->
+    <div class="absolute inset-0 bg-black/75" id="modal-backdrop"></div>
+    
+    <!-- Modal Content -->
+    <div class="relative bg-white rounded-lg shadow-2xl w-full max-w-4xl mx-4 my-4 max-h-[90vh] flex flex-col">
+        <!-- Modal Header -->
+        <div class="bg-amber-500 text-white px-6 py-4 rounded-t-lg flex items-center justify-between sticky top-0 z-10">
+            <h3 class="text-xl font-bold flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                Report an Incident
+            </h3>
+            <button id="close-modal" class="text-white hover:text-gray-200 p-1 rounded-full hover:bg-amber-600 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        
+        <!-- Modal Body with Scrollable Content -->
+        <div class="overflow-y-auto flex-grow p-0">
+            <form id="incident-report-form" class="p-6">
+                <!-- Progress Indicator -->
+                <div class="mb-8 border-b pb-6">
+                    <div class="flex justify-between mb-2">
+                        <span class="text-amber-600 font-medium">Step 1 of 3: Incident Details</span>
+                        <span class="text-gray-500 text-sm">* Required fields</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-amber-500 h-2 rounded-full w-1/3"></div>
                     </div>
                 </div>
-                <div class="md:w-1/2 mt-8 md:mt-0">
-                    <img src="{{ asset('images/home1.jpg') }}" alt="Disaster Management" class="rounded-lg shadow " />
+
+                <!-- Section 1: Incident Details -->
+                <div class="mb-8">
+                    <h4 class="text-lg font-semibold mb-4 text-gray-800 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        Incident Information
+                    </h4>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Incident Type -->
+                        <div class="col-span-2">
+                            <label for="incident-type" class="block text-gray-700 font-medium mb-2">Incident Type*</label>
+                            <select id="incident-type" name="incident-type" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500 bg-white">
+                                <option value="" selected disabled>Select incident type</option>
+                                <option value="flood">Flood</option>
+                                <option value="fire">Fire</option>
+                                <option value="earthquake">Earthquake</option>
+                                <option value="landslide">Landslide</option>
+                                <option value="cyclone">Cyclone/Storm</option>
+                                <option value="other">Other (specify)</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Other Incident Type -->
+                        <div id="other-incident-container" class="col-span-2 hidden">
+                            <label for="other-incident" class="block text-gray-700 font-medium mb-2">Specify Incident Type*</label>
+                            <input type="text" id="other-incident" name="other-incident" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                        </div>
+                        
+                        <!-- Severity Level -->
+                        <div class="col-span-2">
+                            <label class="block text-gray-700 font-medium mb-2">Severity Level*</label>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                <label class="flex items-center p-3 border rounded-lg hover:bg-amber-50 cursor-pointer">
+                                    <input type="radio" name="severity" value="minor" required class="mr-2 text-amber-500 focus:ring-amber-500">
+                                    <span class="text-sm sm:text-base">Minor - No immediate danger</span>
+                                </label>
+                                <label class="flex items-center p-3 border rounded-lg hover:bg-amber-50 cursor-pointer">
+                                    <input type="radio" name="severity" value="moderate" required class="mr-2 text-amber-500 focus:ring-amber-500">
+                                    <span class="text-sm sm:text-base">Moderate - Potential risk</span>
+                                </label>
+                                <label class="flex items-center p-3 border rounded-lg hover:bg-amber-50 cursor-pointer">
+                                    <input type="radio" name="severity" value="severe" required class="mr-2 text-amber-500 focus:ring-amber-500">
+                                    <span class="text-sm sm:text-base">Severe - Immediate danger</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </section>
+
+                <!-- Section 2: Location & Time -->
+                <div class="mb-8">
+                    <h4 class="text-lg font-semibold mb-4 text-gray-800 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        Location & Time
+                    </h4>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Location -->
+                        <div class="col-span-2">
+                            <label for="location" class="block text-gray-700 font-medium mb-2">Location*</label>
+                            <input type="text" id="location" name="location" required placeholder="Street address, landmark, or area" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                        </div>
+                        
+                        <!-- City and State -->
+                        <div>
+                            <label for="city" class="block text-gray-700 font-medium mb-2">City*</label>
+                            <input type="text" id="city" name="city" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                        </div>
+                        
+                        <div>
+                            <label for="state" class="block text-gray-700 font-medium mb-2">State*</label>
+                            <input type="text" id="state" name="state" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                        </div>
+                        
+                        <!-- Incident Date and Time -->
+                        <div>
+                            <label for="incident-date" class="block text-gray-700 font-medium mb-2">Date*</label>
+                            <input type="date" id="incident-date" name="incident-date" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                        </div>
+                        
+                        <div>
+                            <label for="incident-time" class="block text-gray-700 font-medium mb-2">Time*</label>
+                            <input type="time" id="incident-time" name="incident-time" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Situation Assessment -->
+                <div class="mb-8">
+                    <h4 class="text-lg font-semibold mb-4 text-gray-800 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        Situation Assessment
+                    </h4>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Description -->
+                        <div class="col-span-2">
+                            <label for="description" class="block text-gray-700 font-medium mb-2">Description*</label>
+                            <textarea id="description" name="description" rows="4" required placeholder="Please provide details about what happened, current situation, and any immediate needs." class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500"></textarea>
+                        </div>
+                        
+                        <!-- People Affected -->
+                        <div>
+                            <label for="people-affected" class="block text-gray-700 font-medium mb-2">Estimated People Affected</label>
+                            <input type="number" id="people-affected" name="people-affected" min="0" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                        </div>
+                        
+                        <!-- Need Immediate Assistance -->
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">Need Immediate Assistance?*</label>
+                            <div class="flex gap-4">
+                                <label class="flex items-center p-3 border rounded-lg hover:bg-amber-50 cursor-pointer">
+                                    <input type="radio" name="immediate-assistance" value="yes" required class="mr-2 text-amber-500 focus:ring-amber-500">
+                                    <span>Yes</span>
+                                </label>
+                                <label class="flex items-center p-3 border rounded-lg hover:bg-amber-50 cursor-pointer">
+                                    <input type="radio" name="immediate-assistance" value="no" required class="mr-2 text-amber-500 focus:ring-amber-500">
+                                    <span>No</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Section 4: Contact Information -->
+                <div class="mb-4">
+                    <h4 class="text-lg font-semibold mb-4 text-gray-800 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                        Your Contact Information
+                    </h4>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="reporter-name" class="block text-gray-700 font-medium mb-2">Your Name*</label>
+                            <input type="text" id="reporter-name" name="reporter-name" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                        </div>
+                        
+                        <div>
+                            <label for="reporter-phone" class="block text-gray-700 font-medium mb-2">Phone Number*</label>
+                            <input type="tel" id="reporter-phone" name="reporter-phone" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                        </div>
+                        
+                        <div class="col-span-2">
+                            <label for="reporter-email" class="block text-gray-700 font-medium mb-2">Email Address</label>
+                            <input type="email" id="reporter-email" name="reporter-email" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Modal Footer -->
+        <div class="px-6 py-4 bg-gray-50 rounded-b-lg border-t flex justify-between items-center sticky bottom-0">
+            <button id="cancel-report" class="text-gray-600 hover:text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-200 transition font-medium flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                Cancel
+            </button>
+            <button type="submit" form="incident-report-form" class="bg-amber-500 text-white px-6 py-3 rounded-lg hover:bg-amber-600 transition font-medium flex items-center">
+                Submit Report
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
 
         <!-- Features Section -->
         <section class="grid md:grid-cols-3 gap-8 mb-16">
@@ -320,6 +540,9 @@
                 </div>
             </div>
         </section>
+
+       
+
     </main>
 
     <!-- Emergency Hotline Banner -->
@@ -424,6 +647,89 @@
     <!-- Scripts -->
     <script>
         // Mobile Menu Toggle
+       
+   
+    document.addEventListener('DOMContentLoaded', function() {
+        // Report Alert Modal Functionality
+        const reportAlertBtn = document.getElementById('report-alert-btn');
+        const reportAlertModal = document.getElementById('report-alert-modal');
+        const closeModal = document.getElementById('close-modal');
+        const modalBackdrop = document.getElementById('modal-backdrop');
+        const incidentTypeSelect = document.getElementById('incident-type');
+        const otherIncidentContainer = document.getElementById('other-incident-container');
+        const incidentReportForm = document.getElementById('incident-report-form');
+        
+        // Open modal
+        reportAlertBtn.addEventListener('click', function() {
+            reportAlertModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+        });
+        
+        // Close modal functions
+        function closeReportModal() {
+            reportAlertModal.classList.add('hidden');
+            document.body.style.overflow = ''; // Re-enable scrolling
+        }
+        
+        closeModal.addEventListener('click', closeReportModal);
+        modalBackdrop.addEventListener('click', closeReportModal);
+        
+        // Show/hide "Other" incident type field
+        incidentTypeSelect.addEventListener('change', function() {
+            if (this.value === 'other') {
+                otherIncidentContainer.classList.remove('hidden');
+            } else {
+                otherIncidentContainer.classList.add('hidden');
+            }
+        });
+        
+        // Form submission
+        incidentReportForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Here you would normally send the data to your server
+            // For demonstration, we'll show a success message and close the modal
+            
+            // Create success notification
+            const notification = document.createElement('div');
+            notification.classList.add('fixed', 'bottom-4', 'right-4', 'max-w-sm', 'bg-green-600', 'text-white', 'p-4', 'rounded-lg', 'shadow-lg', 'z-50', 'flex', 'items-center');
+            
+            notification.innerHTML = `
+                <div class="mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
+                <div>
+                    <h4 class="font-bold">Report Submitted</h4>
+                    <p>Thank you for reporting this incident. Authorities have been notified.</p>
+                </div>
+                <button class="ml-auto text-white hover:text-gray-200" id="close-notification">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            notification.querySelector('#close-notification').addEventListener('click', function() {
+                notification.remove();
+            });
+            
+            // Auto close notification after 8 seconds
+            setTimeout(() => {
+                if (document.body.contains(notification)) {
+                    notification.remove();
+                }
+            }, 8000);
+            
+            // Reset form and close modal
+            incidentReportForm.reset();
+            closeReportModal();
+        });
+    });
+
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
 
@@ -510,7 +816,53 @@
             // Show notifications after a delay
             setTimeout(showNotifications, 3000);
         });
+        
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Get elements
+    const modal = document.getElementById('report-alert-modal');
+    const closeButton = document.getElementById('close-modal');
+    const cancelButton = document.getElementById('cancel-report');
+    const backdrop = document.getElementById('modal-backdrop');
+    const incidentTypeSelect = document.getElementById('incident-type');
+    const otherIncidentContainer = document.getElementById('other-incident-container');
+    
+    // Close modal function
+    function closeModal() {
+        modal.classList.add('hidden');
+    }
+    
+    // For demo purposes - open modal automatically (remove in production)
+    setTimeout(() => {
+        modal.classList.remove('hidden');
+    }, 500);
+    
+    // Event listeners
+    closeButton.addEventListener('click', closeModal);
+    cancelButton.addEventListener('click', closeModal);
+    backdrop.addEventListener('click', closeModal);
+    
+    // Show/hide "Other" incident type field
+    incidentTypeSelect.addEventListener('change', function() {
+        if (this.value === 'other') {
+            otherIncidentContainer.classList.remove('hidden');
+            document.getElementById('other-incident').setAttribute('required', true);
+        } else {
+            otherIncidentContainer.classList.add('hidden');
+            document.getElementById('other-incident').removeAttribute('required');
+        }
+    });
+    
+    // Form submission (for demo)
+    document.getElementById('incident-report-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Report submitted successfully!');
+        closeModal();
+    });
+});
+
     </script>
+
 </body>
 
 </html>

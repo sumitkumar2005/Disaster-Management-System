@@ -12,6 +12,13 @@ Route::get('/alerts', [AlertController::class, 'showAlerts']);
 Route::get('/resources', [ResourceController::class, 'index']);
 Route::get('/contact', [ContactController::class, 'index']);
 
+// Test routes - commented out but kept for reference in case of future issues
+// Route::get('/test-view', function() {
+//     return view('test_view');
+// });
+
+
+
 Route::middleware('guest')->group(function () {
     Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
     Route::post('/register', [AuthController::class, 'register']);
